@@ -1,0 +1,20 @@
+manual utilisation nano esp32 : 
+https://docs.arduino.cc/tutorials
+/nano-esp32/cheat-sheet/
+
+Reset the Arduino bootloader on the Nano ESP32
+https://support.arduino.cc/hc/en-us/articles/9810414060188-Reset-the-Arduino-bootloader-on-the-Nano-ESP32
+
+all the configuration should be set-up only in the fils : 
+ -config_robots.c 
+ -config_robots.hh
+
+the trigonometrie of the pamis is the same as the big robot. 
+0° --> at the direction of the kitchen 
+positive rotation --> clockwise direction  ( negative rotaion are accepted)
+movement --> all express in milimeter ( negative value are accepted )
+
+/// movement function/// 
+straight(mm)
+rotate (degrées)
+go_to(x_mm,y_mm)
