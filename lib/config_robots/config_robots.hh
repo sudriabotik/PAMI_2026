@@ -3,15 +3,15 @@
 
 #include <Arduino.h>
 
-//# define TEST_MODE
+# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT 
 
 # ifdef TEST_MODE
-# define GLO BAL_WAIT 10000
+# define GLOBAL_WAIT 2000
 # endif
 # ifndef TEST_MODE
-# define GLOBAL_WAIT 3000//85000
+# define GLOBAL_WAIT 85000//85000
 # endif
 
 ///////// define pin name /////////// 
@@ -33,9 +33,9 @@ const uint8_t bouton_equipe = 10; // D10 low = blue vers le haut, hight= jaune (
 
 ////// chose which pami you want to use /////////////
 
-//# define PAMI_1 
+# define PAMI_1 
 //#define PAMI_2
-#define PAMI_3
+//#define PAMI_3
 //#define PAMI_4
 //#define PAMI_5
 //#define PAMI_6
@@ -58,11 +58,11 @@ extern char equipe; // equipe bleu par default
 
 #ifdef PAMI_1 
 
-#define X_POSITION_START_ 2900.0
+#define X_POSITION_START_ 2700.0
 #define Y_POSITION_START_  1900.0
 #define TETA_POSITION_START_ 180.0
 
-#define MOTOR_RPM_ 66
+#define MOTOR_RPM_ 70
 #define MOTOR_ACCEL_ 500
 #define MOTOR_DECEL_ 500
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle

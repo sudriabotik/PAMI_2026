@@ -6,14 +6,15 @@ char equipe = 'B'; // Ã©quipe bleu par default
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2900,800}
+    {2800,1100},
+    {2300,800}
     
     
 };
 
-bool avoidance[] = {false};
-float rpms[] = {100, MOTOR_RPM_, MOTOR_RPM_};
-uint32_t numPoints = 1;
+bool avoidance[] = {false,false};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
+uint32_t numPoints = 2;
 
 # endif 
 

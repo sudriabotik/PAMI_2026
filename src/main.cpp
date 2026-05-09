@@ -13,7 +13,8 @@ volatile bool SuperStarTime = false; // Variable pour indiquer si la superstar e
 unsigned long elapsedTime;
 
 int capteur(int sensorPin); 
-float symetrie(float coordonne);
+float symetrie_x(float coordonne);
+float symetrie_angle(float angle);
 //volatile int8_t evitement = 0 ;
 
 Servo myservo;
@@ -103,7 +104,6 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 }
 
 
-
 void Task1code( void * pvParameters ){
 	vTaskDelay(3000);
 	
@@ -187,6 +187,8 @@ void Task2code( void * pvParameters ){
 	
 	while (!(digitalRead(tirette))){
 		vTaskDelay(20);
+		Serial.print("equi_coul:");
+		Serial.print(!digitalRead(bouton_equipe));
 		Serial.println("wait la tirette task 2");
 	} 
 	
@@ -215,15 +217,19 @@ void Task2code( void * pvParameters ){
 	// DEBUT DU CODE POUR FAIRE DES GO_TO
 	////
 
-	
+	//Serial.print("ap_whil:");
+	//Serial.print(!digitalRead(bouton_equipe));
+
 	if (!digitalRead(bouton_equipe)){ // si on est équipe jaune 
 
 		for (int i = 0; i < numPoints; i++)
 		{
-			waypoints[i].x = symetrie(waypoints[i].x);
+			waypoints[i].x = symetrie_x(waypoints[i].x);
 		}
-		x_position = symetrie(x_position);
+		x_position = symetrie_x(x_position);
+		teta_actuelle = symetrie_angle(teta_actuelle);
 		//teta_actuelle = teta_actuelle + 180;
+		Serial.println("bouton_jaune");
 		equipe = 'J';
 	} 
 	Serial.print(" equipe_couleur :");
@@ -277,10 +283,25 @@ void loop() {
 
 
 
-float symetrie(float coordonne) {
+float symetrie_x(float coordonne) {
 	coordonne = 1500 - (coordonne - 1500);
 	return coordonne ;
 }
+
+float symetrie_angle(float angle)
+{
+	angle = angle + 180 ;
+
+	if (angle >= 180.0f){
+	angle = angle - 360.0f;
+	} 
+	else if (angle < -180.0f){
+	angle = angle + 360.0f;
+
+	}
+	return angle;
+}
+
 
 int capteur(int sensorPin){
 	int16_t d ;
