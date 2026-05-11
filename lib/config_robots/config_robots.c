@@ -6,15 +6,16 @@ char equipe = 'B'; // Ã©quipe bleu par default
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2800,1100},
-    {2300,800}
-    
-    
+    {2950,1500},
+    {2940,1300},
+    {2925,1200},
+    {2500,1200},
+    {1500,100},
 };
 
-bool avoidance[] = {false,false};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-uint32_t numPoints = 2;
+bool avoidance[] = {true,true,true,true,true};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
+uint32_t numPoints = 5;
 
 # endif 
 
@@ -22,17 +23,16 @@ uint32_t numPoints = 2;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2725,1500},
-    {2300,150}
-    
-
+    {2845,1500},
+    {2835,1400},
+    {1500,800},
     
 };
 
-bool avoidance[] = {false,false};
-float rpms[] = {MOTOR_RPM_,MOTOR_RPM_,50};
+bool avoidance[] = {false,false, false};
+float rpms[] = {MOTOR_RPM_,MOTOR_RPM_, MOTOR_RPM_};
 
-uint32_t numPoints = 2;
+uint32_t numPoints = 3;
 
 # endif 
 
@@ -40,15 +40,18 @@ uint32_t numPoints = 2;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2575, 1550},
-    {2200, 800}
-    
+    {2950,1500},
+    {2940,1300},
+    {2925,1200},
+    {2500,1200},
+    {2300,100},
 };
 
-bool avoidance[] = {false,false};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 
-uint32_t numPoints = 2;
+bool avoidance[] = {false,false,false,false,false};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
+
+uint32_t numPoints = 5;
 
 # endif
 
@@ -58,15 +61,15 @@ uint32_t numPoints = 2;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2450,1400 },
-    {1775,1400}
+    {2845,1400},
+    {2835,1300},
+    {2200,800},
 
-  
 };
 
-bool avoidance[] = {false,false};
+bool avoidance[] = {false,false,false};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-uint32_t numPoints = 2;
+uint32_t numPoints = 3;
 
 # endif
 

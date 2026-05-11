@@ -58,13 +58,13 @@ extern char equipe; // equipe bleu par default
 
 #ifdef PAMI_1 
 
-#define X_POSITION_START_ 2700.0
-#define Y_POSITION_START_  1900.0
-#define TETA_POSITION_START_ 180.0
+#define X_POSITION_START_ 2950.0
+#define Y_POSITION_START_  1620.0
+#define TETA_POSITION_START_ -90.0
 
-#define MOTOR_RPM_ 70
-#define MOTOR_ACCEL_ 500
-#define MOTOR_DECEL_ 500
+#define MOTOR_RPM_ 200
+#define MOTOR_ACCEL_ 1000
+#define MOTOR_DECEL_ 1000
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle
 //#define MOTOR_DECEL_FINISH_ 500
 
@@ -81,13 +81,13 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #ifdef PAMI_2
 
-#define X_POSITION_START_ 2725
-#define Y_POSITION_START_  1900
-#define TETA_POSITION_START_ 180.0
+#define X_POSITION_START_ 2850
+#define Y_POSITION_START_  1620
+#define TETA_POSITION_START_ -90
 
-#define MOTOR_RPM_ 75
-#define MOTOR_ACCEL_ 500
-#define MOTOR_DECEL_ 500
+#define MOTOR_RPM_ 200
+#define MOTOR_ACCEL_ 1000
+#define MOTOR_DECEL_ 1000
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle
 //#define MOTOR_DECEL_FINISH_ 500
 
@@ -103,11 +103,11 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #ifdef PAMI_3
 
-#define X_POSITION_START_ 2575
-#define Y_POSITION_START_  1875
+#define X_POSITION_START_ 2950
+#define Y_POSITION_START_  1750
 #define TETA_POSITION_START_ -90
 
-#define MOTOR_RPM_ 100
+#define MOTOR_RPM_ 150
 #define MOTOR_ACCEL_ 500
 #define MOTOR_DECEL_ 500
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle
@@ -119,19 +119,19 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 #define COEF_DROIT 1.0008 // 1.0
 #define ENTRE_AXE 90.39
 
-#define ADD_DELAY_START 3000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time. 
+#define ADD_DELAY_START 1200.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time. 
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
 # endif
 
 #ifdef PAMI_4
 
-#define X_POSITION_START_ 2450
-#define Y_POSITION_START_  1875
+#define X_POSITION_START_ 2850
+#define Y_POSITION_START_  1750
 #define TETA_POSITION_START_ -90
 
-#define MOTOR_RPM_ 100
-#define MOTOR_ACCEL_ 500
-#define MOTOR_DECEL_ 500
+#define MOTOR_RPM_ 200
+#define MOTOR_ACCEL_ 1000
+#define MOTOR_DECEL_ 1000
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle
 //#define MOTOR_DECEL_FINISH_ 500
 
@@ -141,16 +141,16 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 #define COEF_DROIT 1.003
 #define ENTRE_AXE 92.5
 
-#define ADD_DELAY_START 0.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
+#define ADD_DELAY_START 2000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
 # endif // PAMI_4
 
 
 #ifdef PAMI_5
 
-#define X_POSITION_START_ 70.0
-#define Y_POSITION_START_  1600
-#define TETA_POSITION_START_ 0.0
+#define X_POSITION_START_ 50
+#define Y_POSITION_START_  1920
+#define TETA_POSITION_START_ -90
 
 #define MOTOR_RPM_ 150
 #define MOTOR_ACCEL_ 1400
