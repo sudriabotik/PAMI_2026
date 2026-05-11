@@ -249,6 +249,25 @@ void Task2code( void * pvParameters ){
 
 		go_to(waypoints[waypointIndex].x, waypoints[waypointIndex].y);
 
+		if (evitement == 1){  
+			evitement_droit();
+			evitement = 0;
+		}
+		else if (evitement == 2){
+			evitement_gauche();
+			evitement = 0;
+		}
+		else if (evitement == 3)
+		{
+			grand_evitement_droit();
+			evitement = 0;
+		}
+		else if (evitement == 4)
+		{
+			grand_evitement_gauche();
+			evitement = 0;
+		}
+
 		if( (abs(x_position - waypoints[waypointIndex].x)<150) && (abs(y_position - waypoints[waypointIndex].y)<150) ){ // une fois que l'on est proche de la zone on quitte le while 
 			
 			waypointIndex ++;
