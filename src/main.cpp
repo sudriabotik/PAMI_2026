@@ -6,6 +6,8 @@
 #include <freertos/timers.h>  
 #include "ESP32Servo.h"
 
+#define EVITEMENT
+
 uint waypointIndex = 0;
 
 volatile unsigned long Time1; // Variable pour stocker le temps de départ
@@ -126,8 +128,9 @@ void Task1code( void * pvParameters ){
 
 		#ifdef EVITEMENT
 		int sensor_M = capteur(sensorPinMidel);
+		int sensor_R = 0;
 		int sensor_L = capteur(sensorPinLeft);
-		int sensor_R = capteur(sensorPinRight);
+		// int sensor_R = capteur(sensorPinRight);
 		#endif
 
 		# ifdef PRINT_DISTANCES
@@ -249,24 +252,17 @@ void Task2code( void * pvParameters ){
 
 		go_to(waypoints[waypointIndex].x, waypoints[waypointIndex].y);
 
-		if (evitement == 1){  
-			evitement_droit();
-			evitement = 0;
+		if (evitement != 0){  
+			//evitement_droit();
+			while (true)
+			{
+				stop();
+				digitalWrite(ENABLE, HIGH);
+				vTaskDelay(100000);
+			}
+			
 		}
-		else if (evitement == 2){
-			evitement_gauche();
-			evitement = 0;
-		}
-		else if (evitement == 3)
-		{
-			grand_evitement_droit();
-			evitement = 0;
-		}
-		else if (evitement == 4)
-		{
-			grand_evitement_gauche();
-			evitement = 0;
-		}
+		
 
 		if( (abs(x_position - waypoints[waypointIndex].x)<150) && (abs(y_position - waypoints[waypointIndex].y)<150) ){ // une fois que l'on est proche de la zone on quitte le while 
 			
