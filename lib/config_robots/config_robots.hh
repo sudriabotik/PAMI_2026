@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-//# define TEST_MODE
+# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT 
 

@@ -81,6 +81,11 @@ public:
      * Motor movement with external control of timing
      */
     virtual void startMove(long steps1, long steps2, long steps3=0);
+    /*
+     * Extend a running move by adding steps to each motor without resetting the speed profile.
+     * Only well-defined while motors are in CRUISING.
+     */
+    void alterMove(long steps1, long steps2, long steps3=0);
     void startRotate(int deg1, int deg2, int deg3=0){
         startRotate((long)deg1, (long)deg2, (long)deg3);
     };

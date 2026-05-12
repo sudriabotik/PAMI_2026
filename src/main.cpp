@@ -217,6 +217,9 @@ void Task2code( void * pvParameters ){
 	//straight (1000); //1000 mm
 	//straight (-1000); // reculer de 1000 mm
 
+	straight_continue(500);
+	straight_extend(500);
+
 	
 
 
@@ -227,6 +230,8 @@ void Task2code( void * pvParameters ){
 
 	//Serial.print("ap_whil:");
 	//Serial.print(!digitalRead(bouton_equipe));
+
+	/*
 
 	for (int i = 0; i < numPoints; i++)
 	{
@@ -301,6 +306,7 @@ void Task2code( void * pvParameters ){
 		//digitalWrite(ENABLE, HIGH);
 		vTaskDelay(500);
 	}
+	*/
 
 	
 		

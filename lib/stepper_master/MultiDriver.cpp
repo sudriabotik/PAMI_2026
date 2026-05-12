@@ -31,6 +31,21 @@ void MultiDriver::startMove(long steps1, long steps2, long steps3){
     next_action_interval = 1;
 }
 /*
+ * Extend a running move on each motor by adding steps without resetting the profile.
+ * Re-arm event_timers for motors that had already finished so the pump fires them again.
+ */
+void MultiDriver::alterMove(long steps1, long steps2, long steps3){
+    long steps[3] = {steps1, steps2, steps3};
+    FOREACH_MOTOR(
+        if (steps[i]){
+            motors[i]->alterMove(steps[i]);
+            if (event_timers[i] == 0) event_timers[i] = 1;
+        }
+    );
+    ready = false;
+    if (next_action_interval == 0) next_action_interval = 1;
+}
+/*
  * Trigger next step action
  */
 long MultiDriver::nextAction(void){

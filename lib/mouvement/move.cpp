@@ -41,6 +41,36 @@ void straight(float distance_){  // positive and negatif value allowed
   Serial.println("end function straight");
 }
 
+// Démarre un straight non-bloquant, rend la main une fois en CRUISING.
+// Doit être suivi par straight_extend(...) (un ou plusieurs appels) pour terminer.
+void straight_continue(float distance_){
+  Serial.println("debut du straight_continue");
+  float steps_per_mm = (MOTOR_STEPS * MICROSTEPS) / (DIAMETRE_ROUE * M_PI);
+  long steps_R = (long)(distance_ * steps_per_mm * COEF_DROIT);
+  long steps_L = (long)(distance_ * steps_per_mm);
+
+  controller.startMove(steps_R, steps_L);
+  // pompe jusqu'à entrer en CRUISING ; si le segment est trop court on pompe jusqu'à la fin
+  while (controller.isRunning() &&
+         stepperR.getCurrentState() != BasicStepperDriver::CRUISING) {
+    controller.nextAction();
+  }
+}
+
+// Ajoute des pas au mouvement en cours sans toucher au profil de vitesse,
+// puis pompe jusqu'à l'arrêt (décélération naturelle à la fin).
+void straight_extend(float distance_){
+  Serial.println("debut du straight_extend");
+  float steps_per_mm = (MOTOR_STEPS * MICROSTEPS) / (DIAMETRE_ROUE * M_PI);
+  long steps_R = (long)(distance_ * steps_per_mm * COEF_DROIT);
+  long steps_L = (long)(distance_ * steps_per_mm);
+
+  controller.alterMove(steps_R, steps_L);
+  while (controller.isRunning()) controller.nextAction();
+  position();
+  Serial.println("end function straight_extend");
+}
+
 /**
  * @param angle the angle relative, in trigonometric direction , in degrees.
  */

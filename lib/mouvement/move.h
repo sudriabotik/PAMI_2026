@@ -31,6 +31,8 @@ extern BasicStepperDriver stepperL;
 //extern SyncDriver controller(stepperR, stepperL);
 
 void straight(float distance_);
+void straight_continue(float distance_);
+void straight_extend(float distance_);
 void rotation (float angle);
 void orientation(float angle_absolue);
 void go_to(float go_x, float go_y);

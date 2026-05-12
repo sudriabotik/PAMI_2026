@@ -98,9 +98,6 @@ protected:
 
     void calcStepPulse(void);
 
-    // this is internal because one can call the start methods while CRUISING to get here
-    void alterMove(long steps);
-
 private:
     // microstep range (1, 16, 32 etc)
     static const short MAX_MICROSTEP = 128;
@@ -190,6 +187,11 @@ public:
      * by altering rpm for this move only (up to preset rpm).
      */
     void startMove(long steps, long time=0);
+    /*
+     * Extend the current move by adding steps while still running.
+     * Only well-defined while in CRUISING (per FIXME in alterMove implementation).
+     */
+    void alterMove(long steps);
     inline void startRotate(int deg){
         startRotate((long)deg);
     };
