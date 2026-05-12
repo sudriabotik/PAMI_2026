@@ -6,7 +6,7 @@
 #include <freertos/timers.h>  
 #include "ESP32Servo.h"
 
-#define EVITEMENT
+// #define EVITEMENT
 
 uint waypointIndex = 0;
 
@@ -109,6 +109,7 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 void Task1code( void * pvParameters ){
 	vTaskDelay(3000);
 	
+	while ((digitalRead(tirette))) {vTaskDelay(20);}
 	while (!(digitalRead(tirette))){
 		vTaskDelay(20);
 		Serial.println("wait la tirette task 1");
@@ -169,7 +170,7 @@ void Task1code( void * pvParameters ){
 		elapsedTime = millis() - Time1;
 
 		// fin des 15s : on stoppe les moteurs et on fait danser le pami
-		if (elapsedTime > GLOBAL_WAIT + 14500){
+		if (elapsedTime > MATCH_TIME) {
 			stop();
 			digitalWrite(ENABLE, HIGH);
 			Serial.println("FIN du temps des 15sec");
@@ -187,6 +188,10 @@ void Task1code( void * pvParameters ){
 
 void Task2code( void * pvParameters ){
 	vTaskDelay(3000);
+
+	while ((digitalRead(tirette))) {vTaskDelay(20);}
+
+	vTaskDelay(500);
 	
 	while (!(digitalRead(tirette))){
 		vTaskDelay(20);
@@ -222,6 +227,13 @@ void Task2code( void * pvParameters ){
 
 	//Serial.print("ap_whil:");
 	//Serial.print(!digitalRead(bouton_equipe));
+
+	for (int i = 0; i < numPoints; i++)
+	{
+		unsigned long toremove = WAIT_SUBSTRACTION;
+		if (toremove > timereq[i]) toremove = timereq[i]; // we make sure we don't underflow the timereq by substracting more than its value
+		timereq[i] -= toremove; // we substract the WAIT_SUBSTRACTION to the time requirement of each waypoint to take into account the global wait at the beginning of the match.
+	}
 
 	if (!digitalRead(bouton_equipe)){ // si on est équipe jaune 
 
@@ -272,6 +284,12 @@ void Task2code( void * pvParameters ){
 			Serial.print(waypoints[waypointIndex].x);
 			Serial.print(" y:");
 			Serial.println(waypoints[waypointIndex].y);
+			unsigned long elapsedTime = millis() - Time1;
+			while (millis() - Time1 < timereq[waypointIndex]) { // we wait until the time requirement for this waypoint is met
+				Serial.println(millis() - Time1);
+				Serial.println(timereq[waypointIndex]);
+				vTaskDelay(100);
+			}
 		}
 			
 	}
@@ -305,7 +323,7 @@ float symetrie_x(float coordonne) {
 
 float symetrie_angle(float angle)
 {
-	angle = angle + 180 ;
+	angle = 180 - angle;
 
 	if (angle >= 180.0f){
 	angle = angle - 360.0f;
