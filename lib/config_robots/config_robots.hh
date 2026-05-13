@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-# define TEST_MODE
+//# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT 
 
@@ -14,7 +14,7 @@
 # define WAIT_SUBSTRACTION 0
 # endif
 
-# define MATCH_TIME 1000000000000 - WAIT_SUBSTRACTION
+# define MATCH_TIME 100000 - WAIT_SUBSTRACTION
 
 ///////// define pin name /////////// 
 
@@ -35,11 +35,11 @@ const uint8_t bouton_equipe = 10; // D10 low = blue vers le haut, hight= jaune (
 
 ////// chose which pami you want to use /////////////
 
-# define PAMI_1 
+//# define PAMI_1 
 //#define PAMI_2
 //#define PAMI_3
 //#define PAMI_4
-//#define PAMI_5
+#define PAMI_5
 //#define PAMI_6
 
 
@@ -163,8 +163,8 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #ifdef PAMI_5
 
-#define X_POSITION_START_ 50
-#define Y_POSITION_START_  1920
+#define X_POSITION_START_ 2850
+#define Y_POSITION_START_  1800
 #define TETA_POSITION_START_ -90
 
 #define MOTOR_RPM_ 150
@@ -182,12 +182,8 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 #define ADD_DELAY_START 0.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
 
-# ifdef TEST_MODE
-# define GLOBAL_WAIT 2000
-# endif
-# ifndef TEST_MODE
-# define GLOBAL_WAIT 85000//85000
-# endif
+# define GLOBAL_WAIT 45000 - WAIT_SUBSTRACTION
+
 
 # endif // PAMI_5
 

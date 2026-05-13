@@ -30,7 +30,7 @@ Point waypoints[] = {
     
 };
 
-bool avoidance[] = {false,false, false};
+bool avoidance[] = {true, true, true};
 float rpms[] = {MOTOR_RPM_,MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0};
 
@@ -51,7 +51,7 @@ Point waypoints[] = {
 };
 
 
-bool avoidance[] = {false,false,false,false,false};
+bool avoidance[] = {true,true,true,true,true};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 85000, 0};
 
@@ -74,7 +74,7 @@ Point waypoints[] = {
 };
 
 
-bool avoidance[] = {false,false,false,false,false};
+bool avoidance[] = {true,true,true,true,true};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 85000, 0};
 
@@ -86,16 +86,16 @@ uint32_t numPoints = 5;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {500,1600 },
-    {650,1170},
-   { 1840,1170},
-    {1860,1350},
+    {2845,1500},
+    {2835,1400},
+    {1500,800},
   
 };
 
-bool avoidance[] = {false,true,true,true};
+bool avoidance[] = {true,true,true,true};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-uint32_t numPoints = 4;
+unsigned long timereq[] = {0, 0, 0, 0, 0};
+uint32_t numPoints = 2;
 
 # endif
 

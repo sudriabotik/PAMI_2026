@@ -6,7 +6,7 @@
 #include <freertos/timers.h>  
 #include "ESP32Servo.h"
 
-// #define EVITEMENT
+#define EVITEMENT
 
 uint waypointIndex = 0;
 
@@ -228,8 +228,8 @@ void Task2code( void * pvParameters ){
 	//arc_continue(300, 45); arc_extend(300, 45);  // 90° sans pause sonore au milieu
 
 	// test3 arc de cercle + straight
-	arc(500, 90);              // arc bloquant, robot s'arrête à la fin
-	straight(300);             // straight bloquant
+	// arc(500, 90);              // arc bloquant, robot s'arrête à la fin
+	// straight(300);             // straight bloquant
 
 	
 
@@ -240,7 +240,7 @@ void Task2code( void * pvParameters ){
 	//Serial.print("ap_whil:");
 	//Serial.print(!digitalRead(bouton_equipe));
 
-	/*
+	
 
 	for (int i = 0; i < numPoints; i++)
 	{
@@ -315,7 +315,7 @@ void Task2code( void * pvParameters ){
 		//digitalWrite(ENABLE, HIGH);
 		vTaskDelay(500);
 	}
-	*/
+	
 
 	
 		
