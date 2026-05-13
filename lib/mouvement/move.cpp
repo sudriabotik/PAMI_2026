@@ -193,6 +193,153 @@ void go_to(float go_x, float go_y){
   return;
 }
 
+// Calcule steps_R/L et rpm_R/L pour un arc de rayon `rayon` (mm) et `angle_deg`.
+// Signe de angle_deg : positif = horaire (roue L extérieure), négatif = anti-horaire.
+// Renvoie le rayon effectivement utilisé (clamp si trop petit).
+static float arc_compute(float rayon, float angle_deg,
+                         long *steps_R, long *steps_L,
+                         float *rpm_R,  float *rpm_L){
+  float E   = ENTRE_AXE;
+  float spm = (MOTOR_STEPS * MICROSTEPS) / (DIAMETRE_ROUE * M_PI);
+
+  if (rayon <= E / 2.0f){
+    Serial.print("arc: rayon trop petit (");
+    Serial.print(rayon);
+    Serial.print(" mm), clamp a ");
+    rayon = E / 2.0f + 1.0f;
+    Serial.println(rayon);
+  }
+
+  float theta_rad = fabsf(angle_deg) * (float)M_PI / 180.0f;
+  int   dir       = (angle_deg >= 0.0f) ? 1 : -1;
+
+  float len_outer = (rayon + E / 2.0f) * theta_rad;
+  float len_inner = (rayon - E / 2.0f) * theta_rad;
+
+  float rpm_outer = MOTOR_RPM * (rayon + E / 2.0f) / rayon;
+  float rpm_inner = MOTOR_RPM * (rayon - E / 2.0f) / rayon;
+
+  if (dir > 0){
+    // Horaire : L = exterieur, R = interieur
+    *steps_L = (long)(len_outer * spm);
+    *steps_R = (long)(len_inner * spm * COEF_DROIT);
+    *rpm_L   = rpm_outer;
+    *rpm_R   = rpm_inner;
+  } else {
+    // Anti-horaire : R = exterieur, L = interieur
+    *steps_R = (long)(len_outer * spm * COEF_DROIT);
+    *steps_L = (long)(len_inner * spm);
+    *rpm_R   = rpm_outer;
+    *rpm_L   = rpm_inner;
+  }
+  return rayon;
+}
+
+// Met à jour x_position, y_position, teta_actuelle pour un arc déjà parcouru.
+// Convention cos/sin(teta) cohérente avec position() (move.cpp:256-257).
+static void arc_apply_odometry(float rayon, float angle_deg){
+  float theta_rad = fabsf(angle_deg) * (float)M_PI / 180.0f;
+  float chord     = 2.0f * rayon * sinf(theta_rad / 2.0f);
+  float mid_teta  = teta_actuelle + angle_deg / 2.0f;
+  x_position += chord * cosf(mid_teta * (float)M_PI / 180.0f);
+  y_position += chord * sinf(mid_teta * (float)M_PI / 180.0f);
+  teta_actuelle += angle_deg;
+  if (teta_actuelle >= 360.0f) teta_actuelle -= 360.0f;
+  else if (teta_actuelle < 0.0f) teta_actuelle += 360.0f;
+}
+
+// Arc de cercle bloquant. Centre du robot à vitesse v = pi*D*MOTOR_RPM/60 (idem straight).
+// rayon : mm (positif), angle_deg : signe = direction (positif = horaire).
+void arc(float rayon, float angle_deg){
+  Serial.print("debut du arc, rayon:");
+  Serial.print(rayon);
+  Serial.print(" angle:");
+  Serial.println(angle_deg);
+
+  long  steps_R, steps_L;
+  float rpm_R,   rpm_L;
+  float r_eff = arc_compute(rayon, angle_deg, &steps_R, &steps_L, &rpm_R, &rpm_L);
+
+  stepperR.setRPM(rpm_R);
+  stepperL.setRPM(rpm_L);
+
+  Serial.print(" steps R:");
+  Serial.print(steps_R);
+  Serial.print(" steps L:");
+  Serial.print(steps_L);
+  Serial.print(" rpm R:");
+  Serial.print(rpm_R);
+  Serial.print(" rpm L:");
+  Serial.println(rpm_L);
+
+  controller.move(steps_R, steps_L);
+  arc_apply_odometry(r_eff, angle_deg);
+
+  // Restaure le RPM nominal pour ne pas polluer les straight() suivants.
+  stepperR.setRPM(MOTOR_RPM);
+  stepperL.setRPM(MOTOR_RPM);
+
+  Serial.print(" new x:");
+  Serial.print(x_position);
+  Serial.print(" y:");
+  Serial.print(y_position);
+  Serial.print(" teta:");
+  Serial.println(teta_actuelle);
+  Serial.println("end function arc");
+}
+
+// Démarre un arc non-bloquant, rend la main une fois en CRUISING.
+// Doit être suivi par arc_extend(...) avec MÊME rayon et MÊME signe d'angle.
+// Mélanger straight_continue/extend et arc_continue/extend dans la même chaîne
+// n'est pas supporté (alterMove ne change pas le profil de vitesse).
+void arc_continue(float rayon, float angle_deg){
+  Serial.println("debut du arc_continue");
+  long  steps_R, steps_L;
+  float rpm_R,   rpm_L;
+  float r_eff = arc_compute(rayon, angle_deg, &steps_R, &steps_L, &rpm_R, &rpm_L);
+
+  stepperR.setRPM(rpm_R);
+  stepperL.setRPM(rpm_L);
+
+  controller.startMove(steps_R, steps_L);
+  // Met à jour l'odométrie immédiatement (le mouvement est lancé, on suppose
+  // qu'il se terminera). Comme ça straight_alter/ramp_to qui suivent calculent
+  // dans le bon cap. La formule chord se décompose linéairement, donc
+  // arc_continue(R, a) + arc_extend(R, b) donne le même résultat odométrique
+  // que arc(R, a+b).
+  arc_apply_odometry(r_eff, angle_deg);
+
+  while (controller.isRunning() &&
+         stepperR.getCurrentState() != BasicStepperDriver::CRUISING){
+    controller.nextAction();
+  }
+}
+
+// Ajoute des pas à l'arc en cours sans toucher au profil de vitesse,
+// puis pompe jusqu'à l'arrêt. Met à jour l'odométrie pour SON segment uniquement.
+void arc_extend(float rayon, float angle_deg){
+  Serial.println("debut du arc_extend");
+  long  steps_R, steps_L;
+  float rpm_R,   rpm_L;
+  float r_eff = arc_compute(rayon, angle_deg, &steps_R, &steps_L, &rpm_R, &rpm_L);
+
+  controller.alterMove(steps_R, steps_L);
+  while (controller.isRunning()) controller.nextAction();
+
+  arc_apply_odometry(r_eff, angle_deg);
+
+  stepperR.setRPM(MOTOR_RPM);
+  stepperL.setRPM(MOTOR_RPM);
+
+  Serial.print(" new x:");
+  Serial.print(x_position);
+  Serial.print(" y:");
+  Serial.print(y_position);
+  Serial.print(" teta:");
+  Serial.println(teta_actuelle);
+  Serial.println("end function arc_extend");
+}
+
 void debug_position(){
   Serial.print("stepperR.getStepsCompleted()");
   Serial.print(stepperR.getStepsCompleted());

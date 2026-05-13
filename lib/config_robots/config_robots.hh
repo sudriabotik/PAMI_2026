@@ -14,7 +14,7 @@
 # define WAIT_SUBSTRACTION 0
 # endif
 
-# define MATCH_TIME 100000 - WAIT_SUBSTRACTION
+# define MATCH_TIME 1000000000000 - WAIT_SUBSTRACTION
 
 ///////// define pin name /////////// 
 
@@ -65,7 +65,7 @@ extern char equipe; // equipe bleu par default
 #define Y_POSITION_START_  1620.0
 #define TETA_POSITION_START_ -90.0
 
-#define MOTOR_RPM_ 200
+#define MOTOR_RPM_ 100
 #define MOTOR_ACCEL_ 1000
 #define MOTOR_DECEL_ 1000
 //#define MOTOR_DECEL_AVOIDEMENT 5000 // freinage brust s'il y a un obstacle

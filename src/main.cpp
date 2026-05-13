@@ -217,12 +217,21 @@ void Task2code( void * pvParameters ){
 	//straight (1000); //1000 mm
 	//straight (-1000); // reculer de 1000 mm
 
-	straight_continue(500);
-	straight_extend(500);
+	
+	// test 1 enchaine deux commandes
+	//straight_continue(500);
+	//straight_extend(500);
+
+	// test2 arc de cercle
+	//arc(500, 90);         // quart de cercle à droite, rayon 200 mm
+	//arc(150, 360);         // cercle complet — doit revenir au point de départ
+	//arc_continue(300, 45); arc_extend(300, 45);  // 90° sans pause sonore au milieu
+
+	// test3 arc de cercle + straight
+	arc(500, 90);              // arc bloquant, robot s'arrête à la fin
+	straight(300);             // straight bloquant
 
 	
-
-
 
 	/////
 	// DEBUT DU CODE POUR FAIRE DES GO_TO
