@@ -64,7 +64,7 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 {
 	if ((evitement == 0) && moving() && avoidance[waypointIndex])
 	{
-		if (sensor_M > 5 && sensor_M < 200)
+		if (sensor_M > 5 && sensor_M < 200 && avoidance[waypointIndex] >= AVOID_MIDDLE)
 		{
 			stop();
 			Serial.println("obstacle Middle");
@@ -72,14 +72,14 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 			else evitement = 2; //evitement par la gauche
 			vTaskDelay(10/portTICK_PERIOD_MS);
 		}
-		else if (sensor_L > 5 && sensor_L  < 100 )
+		else if (sensor_L > 5 && sensor_L  < 100 && avoidance[waypointIndex] >= AVOID_ALL)
 		{
 			stop();
 			Serial.println("obstacle Left");
 			evitement = 1;
 			vTaskDelay(10/portTICK_PERIOD_MS);
 		}
-		else if (sensor_R > 5 && sensor_R < 100 )
+		else if (sensor_R > 5 && sensor_R < 100 && avoidance[waypointIndex] >= AVOID_ALL)
 		{
 			stop();
 			Serial.println("obstacle Right");
@@ -89,7 +89,7 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 	}
 	else if (evitement != -1)
 	{
-		if ((sensor_L > 5 && sensor_R < 100) | (sensor_M > 5 && sensor_M < 100) | (sensor_R > 5 && sensor_R < 100))
+		if ((sensor_L > 5 && sensor_L < 100) | (sensor_M > 5 && sensor_M < 100) | (sensor_R > 5 && sensor_R < 100))
 		{
 			stop();
 			Serial.println("extra obstacle");

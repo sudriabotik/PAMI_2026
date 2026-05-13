@@ -13,7 +13,7 @@ Point waypoints[] = {
     {1500,100},
 };
 
-bool avoidance[] = {true,true,true,true,true};
+int avoidance[] = {AVOID_NOTHING, AVOID_MIDDLE, AVOID_MIDDLE, AVOID_MIDDLE, AVOID_ALL};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 0, 0};
 uint32_t numPoints = 5;
@@ -27,11 +27,10 @@ Point waypoints[] = {
     {2845,1500},
     {2835,1400},
     {1500,800},
-    
 };
 
-bool avoidance[] = {true, true, true};
-float rpms[] = {MOTOR_RPM_,MOTOR_RPM_, MOTOR_RPM_};
+int avoidance[] = {AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0};
 
 uint32_t numPoints = 3;
@@ -43,15 +42,16 @@ uint32_t numPoints = 3;
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
     {2540,1895},
-    {2530,1890},
+    {2500,1880},
     {2500,1700},
+    // EXIT THE ZONE
     {2500,1450},
     {1750,1450},
     
 };
 
 
-bool avoidance[] = {true,true,true,true,true};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 85000, 0};
 
@@ -66,15 +66,16 @@ uint32_t numPoints = 5;
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
     {2690,1895},
-    {2680,1890},
-    {2650,1750},
+    {2650,1880},
+    {2650,1700},
+    // EXIT THE ZONE
     {2600,1300},
     {2200,800},
     
 };
 
 
-bool avoidance[] = {true,true,true,true,true};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 85000, 0};
 
@@ -92,7 +93,7 @@ Point waypoints[] = {
   
 };
 
-bool avoidance[] = {true,true,true,true};
+int avoidance[] = {AVOID_NOTHING,true,true,true};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0, 0, 0};
 uint32_t numPoints = 2;

@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-//# define TEST_MODE
+# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT 
 
@@ -15,6 +15,10 @@
 # endif
 
 # define MATCH_TIME 100000 - WAIT_SUBSTRACTION
+
+# define AVOID_NOTHING 0
+# define AVOID_MIDDLE 1
+# define AVOID_ALL 2
 
 ///////// define pin name /////////// 
 
@@ -35,7 +39,7 @@ const uint8_t bouton_equipe = 10; // D10 low = blue vers le haut, hight= jaune (
 
 ////// chose which pami you want to use /////////////
 
-//# define PAMI_1 
+//#define PAMI_1 
 //#define PAMI_2
 //#define PAMI_3
 //#define PAMI_4
@@ -52,7 +56,7 @@ typedef struct Point {
 } Point;
 
 extern Point waypoints[];
-extern bool avoidance[];
+extern int avoidance[];
 extern float rpms[];
 extern uint32_t numPoints;
 extern unsigned long timereq[];
@@ -182,7 +186,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 #define ADD_DELAY_START 0.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
 
-# define GLOBAL_WAIT 45000 - WAIT_SUBSTRACTION
+# define GLOBAL_WAIT 85000 - WAIT_SUBSTRACTION
 
 
 # endif // PAMI_5
