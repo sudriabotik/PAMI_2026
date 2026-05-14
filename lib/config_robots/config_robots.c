@@ -24,11 +24,11 @@ uint32_t numPoints = 3;
 Point waypoints[] = {
     {2675,1800},
     {2500,1450},
-    {1750,1450},
+    {1870,1450},
 };
 
 int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_NOTHING};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, 50};
 unsigned long timereq[] = {0, 0, 0};
 
 uint32_t numPoints = 3;
@@ -63,7 +63,7 @@ Point waypoints[] = {
     {2450,1700},
     // EXIT ZONE
     {2450,1400},
-    {1500,1000},
+    {1500,950},
     
     
 };
@@ -85,7 +85,7 @@ Point waypoints[] = {
     {2600,1640},
     // EXIT ZONE
     {2600,1400},
-    {2300,100},
+    {2300,210},
   
 };
 
