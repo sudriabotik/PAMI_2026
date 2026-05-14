@@ -269,15 +269,17 @@ void Task2code( void * pvParameters ){
 
 		go_to(waypoints[waypointIndex].x, waypoints[waypointIndex].y);
 
-		while (evitement != 0){  
-			//evitement_droit();
-			//stop();
-			//digitalWrite(ENABLE, HIGH);
-			//vTaskDelay(100);
+		if (evitement == 1)
+		{  
+			evitement_droit();
+			stop();
 			evitement = 0;
-			// Serial.println("evitement fini");
-			vTaskDelay(200);
-			
+		}
+		if (evitement == 2)
+		{  
+			evitement_gauche();
+			stop();
+			evitement = 0;
 		}
 		
 
