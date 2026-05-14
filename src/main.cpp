@@ -62,7 +62,7 @@ void setup() {
 
 void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 {
-	if ((evitement == 0) && moving() && avoidance[waypointIndex])
+	if ((evitement == 0) && moving())
 	{
 		if (sensor_M > 5 && sensor_M < 200 && avoidance[waypointIndex] >= AVOID_MIDDLE)
 		{
@@ -85,22 +85,6 @@ void AvoidanceChecksNormal(int sensor_M, int sensor_L, int sensor_R)
 			Serial.println("obstacle Right");
 			evitement = 2;
 			vTaskDelay(10/portTICK_PERIOD_MS);
-		}
-	}
-	else if (evitement != -1)
-	{
-		if ((sensor_L > 5 && sensor_L < 100) | (sensor_M > 5 && sensor_M < 100) | (sensor_R > 5 && sensor_R < 100))
-		{
-			stop();
-			Serial.println("extra obstacle");
-
-			if (evitement == 1) evitement = 4; // big turn to the left
-			else if (evitement == 2) evitement = 3; // big turn to the right
-			else if (evitement == 3) evitement = 2;
-			else if (evitement == 4) evitement = 1;
-
-			vTaskDelay(10/portTICK_PERIOD_MS);
-		
 		}
 	}
 }
@@ -278,14 +262,14 @@ void Task2code( void * pvParameters ){
 
 		go_to(waypoints[waypointIndex].x, waypoints[waypointIndex].y);
 
-		if (evitement != 0){  
+		while (evitement != 0){  
 			//evitement_droit();
-			while (true)
-			{
-				stop();
-				digitalWrite(ENABLE, HIGH);
-				vTaskDelay(100000);
-			}
+			//stop();
+			//digitalWrite(ENABLE, HIGH);
+			//vTaskDelay(100);
+			evitement = 0;
+			// Serial.println("evitement fini");
+			vTaskDelay(200);
 			
 		}
 		
@@ -298,7 +282,8 @@ void Task2code( void * pvParameters ){
 			Serial.print(waypoints[waypointIndex].x);
 			Serial.print(" y:");
 			Serial.println(waypoints[waypointIndex].y);
-			unsigned long elapsedTime = millis() - Time1;
+
+			
 			while (millis() - Time1 < timereq[waypointIndex]) { // we wait until the time requirement for this waypoint is met
 				Serial.println(millis() - Time1);
 				Serial.println(timereq[waypointIndex]);
