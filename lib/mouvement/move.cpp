@@ -12,6 +12,8 @@ int evitement = 0 ;
 BasicStepperDriver stepperR(MOTOR_STEPS, DIR_X, STEP_X);
 BasicStepperDriver stepperL(MOTOR_STEPS, DIR_Y, STEP_Y);
 SyncDriver controller(stepperR, stepperL);
+volatile float current_translation_rpm = MOTOR_RPM;
+volatile float current_rotation_rpm = MOTOR_RPM;
 
 void configureMotors(){ 
 stepperR.begin(MOTOR_RPM, MICROSTEPS);
@@ -22,6 +24,9 @@ stepperL.setSpeedProfile(stepperL.LINEAR_SPEED, MOTOR_ACCEL, MOTOR_DECEL);
 
 void straight(float distance_){  // positive and negatif value allowed
   Serial.println("debut du straight");
+
+  stepperL.setRPM(current_translation_rpm);
+	stepperR.setRPM(current_translation_rpm);
 
   // COEF_DROIT biaise les pas de la roue droite pour compenser l'asymétrie physique des roues
   float steps_per_mm = (MOTOR_STEPS * MICROSTEPS) / (DIAMETRE_ROUE * M_PI);
@@ -79,6 +84,10 @@ void rotation (float angle){
   int sauvegarde_evitement;
   sauvegarde_evitement = evitement ;
   evitement = -1;
+
+  stepperL.setRPM(current_rotation_rpm);
+	stepperR.setRPM(current_rotation_rpm);
+
 
   stepperR.setSpeedProfile(stepperR.LINEAR_SPEED, MOTOR_ACCEL_DECEL_ROTATE, MOTOR_ACCEL_DECEL_ROTATE);
   stepperL.setSpeedProfile(stepperL.LINEAR_SPEED, MOTOR_ACCEL_DECEL_ROTATE, MOTOR_ACCEL_DECEL_ROTATE);

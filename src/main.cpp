@@ -191,7 +191,10 @@ void Task2code( void * pvParameters ){
 	/// on fait trouner le robot sur lui meme et
 	// on corrige COEF_ROTATE situer dans le lib/config_robots/config_robots.h 
 
+	//current_rotation_rpm = 40;
+	//current_translation_rpm = MOTOR_RPM;
 	//rotation(360*10);
+	//straight(1000);
 
 	// on fait avancer le robot et il y a 2 parametre à corriger 
 	// le diametre de la roue: DIAMETRE_ROUE situer dans le lib/config_robots/config_robots.h 
@@ -226,6 +229,9 @@ void Task2code( void * pvParameters ){
 
 	
 
+	current_rotation_rpm = ROTATION_RPM;
+	current_translation_rpm = MOTOR_RPM;
+
 	for (int i = 0; i < numPoints; i++)
 	{
 		unsigned long toremove = WAIT_SUBSTRACTION;
@@ -259,6 +265,7 @@ void Task2code( void * pvParameters ){
 
 		stepperL.setRPM(rpms[waypointIndex]);
 		stepperR.setRPM(rpms[waypointIndex]);
+		current_translation_rpm = rpms[waypointIndex];
 
 		go_to(waypoints[waypointIndex].x, waypoints[waypointIndex].y);
 

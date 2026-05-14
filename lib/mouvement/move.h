@@ -56,6 +56,9 @@ extern float x_position ;
 extern float y_position ;
 extern float teta_actuelle;
 
+extern volatile float current_translation_rpm ;
+extern volatile float current_rotation_rpm ;
+
 extern long int total_Steps_R;
 extern long int total_Steps_L;
 

@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-# define TEST_MODE
+//# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT 
 
@@ -35,12 +35,14 @@ const uint8_t bouton_equipe = 10; // D10 low = blue vers le haut, hight= jaune (
 #define STEP_Y 7 //moteur droit
 #define ENABLE 8 // pin enable des driver moteur droite et gauche
 
+#define ROTATION_RPM 100
+
 ///////////// fin pin name ////////////
 
 ////// chose which pami you want to use /////////////
 
-//#define PAMI_1 
-#define PAMI_2
+#define PAMI_1 
+//#define PAMI_2
 //#define PAMI_3
 //#define PAMI_4
 //#define PAMI_5
@@ -79,7 +81,7 @@ extern char equipe; // equipe bleu par default
 
 #define DIAMETRE_ROUE 59 //distance (2)
 #define COEF_DROIT 1.0 //droit(1) diminuer - plus a gauche, augmenter - plus a droite 
-#define ENTRE_AXE 92.5 //rotation (3)
+#define ENTRE_AXE 85.5 //rotation (3)
 
 #define ADD_DELAY_START 2000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
@@ -104,7 +106,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #define DIAMETRE_ROUE 59.5
 #define COEF_DROIT 0.99987
-#define ENTRE_AXE 92.5 
+#define ENTRE_AXE 87.0 
 
 #define ADD_DELAY_START 4000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
@@ -129,7 +131,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #define DIAMETRE_ROUE 59.87
 #define COEF_DROIT 1.0008 // 1.0
-#define ENTRE_AXE 90.39
+#define ENTRE_AXE 89.0
 
 #define ADD_DELAY_START 3000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time. 
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
@@ -154,7 +156,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #define DIAMETRE_ROUE 58.93
 #define COEF_DROIT 1.003
-#define ENTRE_AXE 92.5
+#define ENTRE_AXE 86.0
 
 #define ADD_DELAY_START 4000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered
@@ -178,9 +180,9 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #define MOTOR_ACCEL_DECEL_ROTATE_ 700 // 700
 
-#define DIAMETRE_ROUE 61.0
+#define DIAMETRE_ROUE 65.0
 #define COEF_DROIT 1.0
-#define ENTRE_AXE 97.8
+#define ENTRE_AXE 89.5
 
 #define ADD_DELAY_START 4000.0 // after the 85sec we add a extra delay to avoid all the pami to start at the same time.
 const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider there is no floor  // True when the superstar is doing the superstar-specific movements, used to change how avoidances are triggered

@@ -23,11 +23,11 @@ uint32_t numPoints = 3;
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
     {2675,1800},
-    {2450,1450},
+    {2500,1450},
     {1750,1450},
 };
 
-int avoidance[] = {AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_NOTHING};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
 unsigned long timereq[] = {0, 0, 0};
 
