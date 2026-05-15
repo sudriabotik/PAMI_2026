@@ -6,7 +6,7 @@
 #include <freertos/timers.h>  
 #include "ESP32Servo.h"
 
-#define EVITEMENT
+ // #define EVITEMENT // by paul evitement is already define in config.h
 
 uint waypointIndex = 0;
 

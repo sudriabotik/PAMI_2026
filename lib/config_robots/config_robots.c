@@ -7,14 +7,15 @@ char equipe = 'B'; // Ã©quipe bleu par default
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
     {2475,1500},
-    {2475,1100},
-    {2200,800},
+    //{2475,900},
+    //{2200,1100},
+    {2200,900},
 };
 
-int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_ALL};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-unsigned long timereq[] = {0, 0, 0};
-uint32_t numPoints = 3;
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING };
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_  };
+unsigned long timereq[] = {0, 0};
+uint32_t numPoints = 2;
 
 # endif 
 
@@ -22,16 +23,15 @@ uint32_t numPoints = 3;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2675,1800},
-    {2500,1450},
-    {1870,1450},
+    {2675,1450},
+    {1850,1450}, //1880
 };
 
-int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_NOTHING};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, 50};
-unsigned long timereq[] = {0, 0, 0};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING};
+float rpms[] = {MOTOR_RPM_, 60};
+unsigned long timereq[] = {0, 0};
 
-uint32_t numPoints = 3;
+uint32_t numPoints = 2;
 
 # endif 
 
@@ -39,17 +39,16 @@ uint32_t numPoints = 3;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2575,1600},
-    {2450,800},
-    {2900,800},
+    {2575,800},
+    {2800,800},
 };
 
 
-int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_MIDDLE};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-unsigned long timereq[] = {0, 0, 0};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_};
+unsigned long timereq[] = {0, 0};
 
-uint32_t numPoints = 3;
+uint32_t numPoints = 2;
 
 # endif
 
@@ -59,41 +58,42 @@ uint32_t numPoints = 3;
 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2450,1750},
-    {2450,1700},
+    {2500,1750},
+    {2500,1740},
     // EXIT ZONE
-    {2450,1400},
-    {1500,950},
+    {2250,500},
+    {1550,850}
     
     
 };
 
 
-int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_ALL, AVOID_ALL};
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_ALL, AVOID_NOTHING};
 float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-unsigned long timereq[] = {0, 0, 86000, 0, 0};
+unsigned long timereq[] = {0,0, 85500, 0};
 
 uint32_t numPoints = 4;
 
 # endif
 
 #ifdef PAMI_5
-
+ 
 // waypoints and avoidance need to have the same length
 Point waypoints[] = {
-    {2600,1650},
-    {2600,1640},
+    {2650,1650},
+    {2650,1600},
     // EXIT ZONE
-    {2600,1400},
-    {2300,210},
+    {2650,1500},
+    {2300,450},
+    {2300,190},
   
 };
-
-int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL};
-float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_};
-unsigned long timereq[] = {0, 85000, 0, 0};
-uint32_t numPoints = 4;
-
+//int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING, AVOID_MIDDLE, AVOID_ALL}; -> PREMIERE OPTION
+int avoidance[] = {AVOID_NOTHING, AVOID_NOTHING,AVOID_NOTHING, AVOID_NOTHING, AVOID_ALL};
+float rpms[] = {MOTOR_RPM_, MOTOR_RPM_, MOTOR_RPM_,MOTOR_RPM_, MOTOR_RPM_};
+unsigned long timereq[] = {0, 87000,0, 0, 0};
+uint32_t numPoints = 5;
+ 
 # endif
 
 #ifdef PAMI_6
