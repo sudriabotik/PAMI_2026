@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-//# define TEST_MODE
+# define TEST_MODE
 //# define PRINT_DISTANCES
 //# define EVITEMENT
 
@@ -15,7 +15,6 @@
 # endif
 
 # define MATCH_TIME 100000 - WAIT_SUBSTRACTION
-
 // les capteurs ne vérfient rien
 # define AVOID_NOTHING 0
 // on utilise seulement le capteur du milieu pour l'évitement
@@ -77,7 +76,7 @@ extern char equipe; // equipe bleu par default
 
 #ifdef PAMI_1 
 
-#define X_POSITION_START_ 2475.0
+#define X_POSITION_START_ 2725.0 // valeur qualif = 2475.0 ! valeur fin = 2700
 #define Y_POSITION_START_  1900.0
 #define TETA_POSITION_START_ -90.0
 
@@ -102,7 +101,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #ifdef PAMI_2
 
-#define X_POSITION_START_ 2675
+#define X_POSITION_START_ 2940 // valeur de qualif = 2675 ! valeur de fin = 2940
 #define Y_POSITION_START_  1900
 #define TETA_POSITION_START_ -90
 
@@ -127,7 +126,7 @@ const int SUPERSTAR_FLOOR_THRESHOLD = 75; //The distance above which we consider
 
 #ifdef PAMI_3
 
-#define X_POSITION_START_ 2575
+#define X_POSITION_START_ 2825 // Valeur de qualif = 2575 ! valeur de fin = 2825
 #define Y_POSITION_START_  1900
 #define TETA_POSITION_START_ -90
 
